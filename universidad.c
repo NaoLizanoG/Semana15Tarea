@@ -148,6 +148,8 @@ int main()
             fputs(" \n \n", archivoP);
             fputs("  El periodo anual en el que Software tuvo mas alumnos fue el ", archivoP);
             fprintf(archivoP, "%d", software_mayor + 1);
+
+            fclose(archivoP);
             break;
         default:
             break;
