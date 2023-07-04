@@ -52,26 +52,6 @@ void carreras(int i)
     }
 }
 
-/*void imprimir(void)
-{
-    FILE *archivoP;
-
-    archivoP = fopen("archivoAlumno.txt", "a+");
-    for (int i = 0; i < 5; i++)
-    {
-        for (int j = 0; j < 2; j++)
-        {
-            for (int k = 0; k < 7; k++)
-            {
-                fprintf(archivoP, "%d", ingresos[i][j][k]);
-                fputs(" ", archivoP);
-                fputs(" \n", archivoP);
-            }
-            fputs(" ; ", archivoP);
-        }
-    }
-}*/
-
 int main()
 {
 
@@ -80,8 +60,7 @@ int main()
     int num_mayor = 0, carrera_mayor = 0, software_mayor = 0;
     do
     {
-
-        printf("Elija una de las siguientes  opciones\n");
+        printf("\nElija una de las siguientes  opciones\n");
         printf("1. Ver datos de las carreras\n");
         printf("2. Salir\n");
         scanf("%d", &menu);
@@ -96,22 +75,26 @@ int main()
 
             archivoP = fopen("archivoAlumno.txt", "a+");
 
-            printf("El numero de alumnos de cada carrera es:\n");
 
-            // ciclo for para determinar el numero de alumnos de cada periodo anual por carreras
-            for (int i = 0; i < 7; i++)
-            {
-                carreras(i);
-                for (int j = 0; j < 5; j++)
+
+                printf("El numero de alumnos de cada carrera es:\n");
+
+                // ciclo for para determinar el numero de alumnos de cada periodo anual por carreras
+                for (int i = 0; i < 7; i++)
                 {
-                    alumnos[i][j] = rand() % 101;
-                    printf("Periodo anual %d: %d\n", j + 1, alumnos[i][j]);
-                    fprintf(archivoP, "%d", alumnos[i][j]);
-                    fputs(" ; ", archivoP);
-                    periodo[j] += alumnos[i][j];
+                    carreras(i);
+                    for (int j = 0; j < 5; j++)
+                    {
+                        alumnos[i][j] = rand() % 101;
+                        printf("Periodo anual %d: %d\n", j + 1, alumnos[i][j]);
+                        fprintf(archivoP, "%d", alumnos[i][j]);
+                        fputs(" ; ", archivoP);
+                        periodo[j] += alumnos[i][j];
+                    }
+                    fputs("\n", archivoP);
                 }
-                fputs("\n", archivoP);
-            }
+
+            
 
             printf("\n");
 
@@ -124,10 +107,16 @@ int main()
                     num_mayor = j;
                 }
                 printf("total del periodo anual %d es de %d\n", j + 1, periodo[j]);
-                fputs(" \n ", archivoP);
+                fputs(" \n \n", archivoP);
+                fputs(" Total del periodo anual ", archivoP);
+                fprintf(archivoP, "%d: ", j + 1);
                 fprintf(archivoP, "%d", periodo[j]);
+                fputs("\n", archivoP);
             }
             printf("\na) El periodo anual con mas estudiantes fue %d\n", num_mayor + 1);
+            fputs(" \n \n", archivoP);
+            fputs("  El periodo anual con mas estudiantes fue el ", archivoP);
+            fprintf(archivoP, "%d", num_mayor + 1);
 
             // ciclo for para responder el literal b:La Carrera que recibió la mayor cantidad de alumnos en el último año.
             for (int i = 0; i < 7; i++)
@@ -139,6 +128,10 @@ int main()
             }
 
             printf("b) La carrera con mas ingresos en el ultimo periodo anual fue ");
+            fputs(" \n \n", archivoP);
+            fputs("  La carrera con mas ingresos en el ultimo periodo anual fue la carrera numero ", archivoP);
+            fprintf(archivoP, "%d", carrera_mayor);
+
             carreras(carrera_mayor);
 
             // Ciclo for para responder la preguta c:¿En qué año la carrera de Ingeniería de Software
@@ -152,6 +145,9 @@ int main()
             }
 
             printf("c) El periodo anual en el que Software tuvo mas alumnos fue el %d", software_mayor + 1);
+            fputs(" \n \n", archivoP);
+            fputs("  El periodo anual en el que Software tuvo mas alumnos fue el ", archivoP);
+            fprintf(archivoP, "%d", software_mayor + 1);
             break;
         default:
             break;
